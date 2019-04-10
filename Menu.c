@@ -9,16 +9,17 @@ int main() {
 	printf("Enter here: ");	
 	scanf("%[^\n]%*c", a);
 	
-	FILE *Stuff;
- 	Stuff = fopen(a, "r"); 
-    if (Stuff == NULL) {
+	FILE *input;
+ 	input = fopen(a, "r"); 
+    if (input == NULL) {
         fprintf(stderr, "Can't open input file\n");
         exit(1);}
 
-    char file [400];
-    while (!feof(Stuff)) {
-        fscanf(Stuff, "%c", file);
-        fprintf("%c", file);
+
+    while (!feof(input)) {   //TO DO Fix this shit here  
+        char c;
+        fscanf(*input, "%c", &c, );
+        printf("%c", c);
         
     }
 	
