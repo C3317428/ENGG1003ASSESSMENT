@@ -2,24 +2,21 @@
 #include "Cyphers.h"
 
 void RotationEncrypt (char x[], int Key){
-    int r;
+    int r = 0;
     int Stop = strlen(x);
     while (r < Stop) {
         
+        if (96 < x[r] && x[r] < 123){
+            x[r] -= 32; //Turns the letter from lowercase to uppercase
+        }
+                
         if (64 < x[r] && x[r]< 91){
             x[r] += Key;
                 if (x[r] > 90){
                     x[r] -= 26;
                 }
         }
-
-        else if (96 < x[r] && x[r] < 123){
-            x[r] += Key;
-                if (x[r] > 122){
-                    x[r] -= 26;
-                }
-            x[r] -= 32; //Turns the letter from lowercase to uppercase
-        }
+        
         else {}
         r++;
     }
@@ -27,9 +24,13 @@ void RotationEncrypt (char x[], int Key){
 
 
 void RotationDecrypt (char x[], int Key){
-    int r;
+    int r = 0;
     int Stop = strlen(x);
     while (r < Stop) {
+        
+        if (x[r] > 96 && x[r] < 123){
+            x[r] -= 32;
+        }
         
         if (64 < x[r] && x[r]< 91){
             x[r] -= Key;
@@ -37,14 +38,7 @@ void RotationDecrypt (char x[], int Key){
                     x[r] += 26;
                 }
         }
-
-        else if (96 < x[r] && x[r] < 123){
-            x[r] -= Key;
-                if (x[r] < 97){
-                    x[r] += 26;
-            x[r] -= 32; //Turns the letter from lowercase to uppercase
-                }
-        }
+        
         else {}
         r++;
     }
