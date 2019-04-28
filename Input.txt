@@ -6,3 +6,4 @@ XXXXXXXXXXXXXXX
 
 Where T is the task number, N is the key (For substitution: N is a number in the range 1-25. For substitution: N is the substitution code 
 where the 1st letter corresponds to A, the 2nd letter corresponds to B, etc...), and XXXXXXXXXX is to be decoded.
+Please follow this format or it may not work.
