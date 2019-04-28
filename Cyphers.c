@@ -1,7 +1,9 @@
 #include <string.h>  //Includes the string library
 #include "Cyphers.h" //Includes the function prototypes from Cyphers.h
 
-
+/*A function declaration for the function 'RotationEncrypt()' which returns nothing and accepts a character array and 
+ *an integer as its arguments. It uses rotation encryption to encrypt the character array by the amount given by the 
+ *integer received by the function. The int can't be higher than 26 or lower than 0.*/
 void RotationEncrypt (char x[], int Key){
     int r = 0;            //Array element number, determines which part of the array is accessed
     int Stop = strlen(x); //Makes stop the length of the string
@@ -23,7 +25,9 @@ void RotationEncrypt (char x[], int Key){
     }
 }
 
-
+/*A function declaration for the function 'RotationDecrypt()' which returns nothing and accepts a character array and 
+ *an integer as its arguments. It uses rotation Decryption to decrypt the character array by the amount given by the 
+ *integer received by the function. The int can't be higher than 26 or lower than 0.*/
 void RotationDecrypt (char x[], int Key){
     int r = 0;            //Array element number, determines which part of the array is accessed
     int Stop = strlen(x); //Makes stop the length of the string
@@ -45,7 +49,9 @@ void RotationDecrypt (char x[], int Key){
     }
 }
 
-
+/*A function declaration for the function 'SubstitutionEncrypt()' which returns nothing and accepts two character arrays 
+ *as its arguments. It uses substitution encryption to encrypt the 1st character array with the key given by the 2nd 
+ *array received by the function. The 2nd array must have precisely 26 characters with no characters repeating.*/
 void SubstitutionEncrypt (char x[], char Key[]) {
     char Alphabet[26] = {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"}; //The standard alphabet, is used for comparison
     int r;                //Alphabet array element number, used to check if letters correspond with each other
@@ -67,7 +73,9 @@ void SubstitutionEncrypt (char x[], char Key[]) {
     }   
 }
 
-
+/*A function declaration for the function 'SubstitutionDecrypt()' which returns nothing and accepts two character arrays 
+ *as its arguments. It uses substitution decryption to decrypt the 1st character array with the key given by the 2nd 
+ *array received by the function. The 2nd array must have precisely 26 characters with no characters repeating.*/
 void SubstitutionDecrypt (char x[], char Key[]) {
     char Alphabet[26] = {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"}; //The standard alphabet, is used for comparison
     int r;                //Alphabet array element number, used to check if letters correspond with each other
