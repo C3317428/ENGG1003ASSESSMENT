@@ -6,9 +6,6 @@
 int main() {
 	printf("Hello there! \nWelcome to my encoder/decoder.\nIt reads text file in the folder this file \nis located in titled 'Input.txt'.\nThere is a limit of 2500 characters.\n\n");
 	
-	/* scanf("%[^\n]%*c", Filename); This takes key inputs from the user and stores them as a string in 'a'. Stops taking inputs when the enter key is pressed. 
-	Not needed anymore but I thought it was really cool so I'm going to keep it here in a comment */
-	
 	FILE *Input;
  	Input = fopen("Input.txt", "r"); 
     if (Input == NULL) {
@@ -28,7 +25,7 @@ int main() {
     char Message [10000];
     
     
-    for (int x = 0; x < 2500; x++){ // This loop zeros the entire array
+    for (int x = 0; x < 10000; x++){ // This loop sets the entire array to NULL
         Message[x] = 0;
     }
     
@@ -36,7 +33,7 @@ int main() {
             case '1':
                 printf("Rotation Encrypt:\n");
                 fseek (Input, 6, SEEK_SET);
-                RKey = fgetc(Input);
+                RKey = (int) fgetc(Input) - 48;
         
                 while (!feof(Input)) {     
                     char LFC; //Letter for cypher
@@ -47,13 +44,14 @@ int main() {
                 
                 RotationEncrypt(Message, RKey);
                 printf("%s", Message);
+                fprintf(Output, "%s", Message);
             break;
             
             case '2':
                 printf("Rotation Decrypt:\n");
                 fseek (Input, 6, SEEK_SET);
-                RKey = fgetc(Input);
-            
+                RKey = (int) fgetc(Input) - 48;
+                                
                 while (!feof(Input)) {     
                     char LFC;
                     fscanf(Input, "%c", &LFC);
@@ -106,7 +104,6 @@ int main() {
                 }
                 
                 SubstitutionDecrypt(Message, SKey);
-                printf("%s", SKey);
                 printf("%s", Message);
                 fprintf(Output, "%s", Message);
             break;
@@ -147,10 +144,6 @@ int main() {
             printf("Something went wrong!");
         }
     printf("\n");
-    
-    
-    fseek (Input, 0, SEEK_SET);
-    
-    
-	return 0;
+ 
+    return 0;
 }
