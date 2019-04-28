@@ -1,3 +1,10 @@
+/*This is a rotation/substitution encrypter/decrypter. It reads a file encodes or decodes it and then prints the results
+ *to the screen and to a new text file. An example of the required formatting for the input file is included with this 
+ *assessment. 
+ *The tasks are: 1 Rotation Encrypt with key, 2 Rotation Decrypt with key, 3 Substitution Encrypt with key,
+ *               4 Substitution Decrypt with key, 5 Rotation Decrypt without key, 6 Substitution Decrypt without key.
+ */
+
 #include <stdio.h>   //Includes the standard Input/Output library
 #include <string.h>  //Includes the string library
 #include <stdlib.h>  //Includes standard library definitions
@@ -100,14 +107,14 @@ int main() {
         break;                               // Ends the switch case
             
             
-        case '3':                                                     // If Type is '3'
-            printf("Substitution Encrypt:\n");                        // Prints the name of the task to the sceen followed by a new line
+        case '3':                                                 // If Type is '3'
+            printf("Substitution Encrypt:\n");                    // Prints the name of the task to the sceen followed by a new line
                 for (int Indicator = 6; Indicator < 32; Indicator++){ // For cursor locations 6 to 31
                     fseek (Input, Indicator, SEEK_SET);               // Read from the Input file at the current cursor location
                     SKey[ArrayP] = fgetc(Input);                      // Put the character read into the corresponding element of the SubstitutionKey array
                     ArrayP++;                                         // Increment ArrayP by 1 to move on to the next element of the array
                 }            
-            ArrayP = 0;                                               // Resets ArrayP to 0
+            ArrayP = 0;                                           // Resets ArrayP to 0
 
             fseek (Input, 33, SEEK_SET);                   // Sets the cursor in the input file to in front of the encrypted letters
                 while (!feof(Input)) {                     // While not at the end of the file
@@ -121,19 +128,19 @@ int main() {
         break;                                  // Ends the switch case
             
             
-        case '4':                                                     // If Type is '4'
-            printf("Substitution Decrypt:\n");                        // Prints the name of the task to the sceen followed by a new line
+        case '4':                                                 // If Type is '4'
+            printf("Substitution Decrypt:\n");                    // Prints the name of the task to the sceen followed by a new line
                 for (int Indicator = 6; Indicator < 32; Indicator++){ // For cursor locations 6 to 31
                     fseek (Input, Indicator, SEEK_SET);               // Read from the Input file at the current cursor location
                     SKey[ArrayP] = fgetc(Input);                      // Put the character read into the corresponding element of the SubstitutionKey array
                     ArrayP++;                                         // Increment ArrayP by 1 to move on to the next element of the array
                 }            
-            ArrayP = 0;                                               // Resets ArrayP to 0
+            ArrayP = 0;                                           // Resets ArrayP to 0
                 
-            fseek (Input, 33, SEEK_SET);                   // Sets the cursor in the input file to in front of the encrypted letters
-                while (!feof(Input)) {                     // While not at the end of the file
-                    fscanf(Input, "%c", &Message[ArrayP]); // Scans a character from the input file and enters it into the array 'Message' at element 'ArrayP'
-                    ArrayP++;                              // Increments ArrayP by 1, moving the array 'Message' onto the next element
+            fseek (Input, 33, SEEK_SET);                // Sets the cursor in the input file to in front of the encrypted letters
+                while (!feof(Input)) {                      // While not at the end of the file
+                    fscanf(Input, "%c", &Message[ArrayP]);  // Scans a character from the input file and enters it into the array 'Message' at element 'ArrayP'
+                    ArrayP++;                               // Increments ArrayP by 1, moving the array 'Message' onto the next element
                 }
                 
             SubstitutionDecrypt(Message, SKey); // Passes the array 'Message' and the array 'SKey' to the function SubstitutionDecrypt
