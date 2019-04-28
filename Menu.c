@@ -1,6 +1,6 @@
 /*This is a rotation/substitution encrypter/decrypter. It reads a file encodes or decodes it and then prints the results
  *to the screen and to a new text file. An example of the required formatting for the input file is included with this 
- *assessment. 
+ *assessment. Please check the file branch called "RequiredCommits" to find the commits needed for marks.
  *The tasks are: 1 Rotation Encrypt with key, 2 Rotation Decrypt with key, 3 Substitution Encrypt with key,
  *               4 Substitution Decrypt with key, 5 Rotation Decrypt without key, 6 Substitution Decrypt without key.
  */
