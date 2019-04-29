@@ -1,3 +1,4 @@
+#include <stdio.h>   //Includes the standard input/output library
 #include <string.h>  //Includes the string library
 #include "Cyphers.h" //Includes the function prototypes from Cyphers.h
 
@@ -99,7 +100,7 @@ void SubstitutionDecrypt (char x[], char Key[]) {
 /*A function definition for the function 'RotationCrack()' which returns nothing and accepts a character array 
  *as its argument. It uses rotation decryption and statistical analysis to decrypt the character array with no key given. Writes the
  *three most likely solutions to the output file and prints the most likely to the screen. */
-/*void RotationCrack (char x[]){
+void RotationCrack (char x[]){
     int Frequency[26] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}; //Creates an array for counting the frequency of letters
     char Alphabet[26] = {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"}; //The standard alphabet, is used for comparison
     int n = 0;            //Array element number, determines which part of the array is accessed        
@@ -168,15 +169,32 @@ void SubstitutionDecrypt (char x[], char Key[]) {
             ThirdLargest  = x[s];                             //The current element becomes the recorded third largest
             Location3 = s;                                    //The location of the third largest element is updated
         }
-    
     }
     
+    int Key1 = (int) Alphabet[Location1] - (int) "E"
+     if (Key1 < 0){
+         Key1 += 26
+     }
+    int Key2 = (int) Alphabet[Location1] - (int) "T"
+     if (Key2 < 0){
+         Key2 += 26
+     }
+    int Key3 = (int) Alphabet[Location1] - (int) "A"
+     if (Key3 < 0){
+         Key3 += 26
+     }
+    FILE *Output;                      // Creates a file pointer at Output
+    Output = fopen("Output.txt", "w"); // Creates the file "Output.txt" for writing and allocates it to Output
     
-    
-    ETA
-    
-    
-    
-    printf("%s", Message);           // Prints the encrypted Message to the screen
-    fprintf(Output, "%s", Message);  // Writes the encrypted message to a text file called 'Output'
-}*/
+    RotationDecrypt(x[], Key1);
+    printf("%s", x[]);           // Prints the encrypted Message to the screen
+    fprintf(Output, "%s", x[]);
+    RotationEncrypt(x[], Key1);
+   
+    RotationDecrypt(x[], Key2);
+    fprintf(Output, "%s", x[]);
+    RotationEncrypt(x[], Key2);
+   
+    RotationDecrypt(x[], Key3);
+    fprintf(Output, "%s", x[]); 
+}
