@@ -29,7 +29,7 @@ int main() {
     char Type = fgetc(Input);          // Sets the character 'Type' to the 2nd character in the file
     int  ArrayP = 0;                   // Array pointer, used for writing the input file to a character array
     int  RKeyD1 = 0;                   // An integer with the value of the first digit of the rotation cypher key
-    int  RKeyD2 = 10;                  // An integer with the value of the second digit of the rotation cypher key
+    int  RKeyD2 = 0;                  // An integer with the value of the second digit of the rotation cypher key
     int  RKeyT;                        // An integer with the value of the actual value of the rotation cypher key
     char SKey[26];                     // A character array that will contain the substitution key
     char Message [10000];              // A character array that will contain the message to be encoded/decoded
@@ -43,11 +43,11 @@ int main() {
             
         case '1':                             // If Type is '1'
             printf("Rotation Encrypt:\n");    // Prints the name of the task to the sceen followed by a new line
-            fseek (Input, 6, SEEK_SET);       // Sets the cursor in the input file to in front of the 1st key digit
+            fseek (Input, 5, SEEK_SET);       // Sets the cursor in the input file to in front of the 1st key digit
             RKeyD1 = (int) fgetc(Input) - 48; // Sets RKeyD1 to the interger corresponding to the character read from the file (i.e. "2" becomes 2)
                 if (RKeyD1 == 0 || RKeyD1 == 1 || RKeyD1 == 2){ // If the first digit of the key is 0, 1, or 2
                     
-                    fseek (Input, 7, SEEK_SET);       // Move the cursor in the input file to in front of the 2nd key digit
+                    fseek (Input, 6, SEEK_SET);       // Move the cursor in the input file to in front of the 2nd key digit
                     RKeyD2 = (int) fgetc(Input) - 48; // Sets RKeyD2 to the interger corresponding to the character read from the file
                     
                     if (RKeyD2 < 0 || RKeyD2 > 9){    // If the value of RKeyD2 is less than 0 or RKeyD2 is greater than 9
@@ -61,8 +61,7 @@ int main() {
                 
                 else {                                // If the first digit is not 0, 1, or 2
                     RKeyT = RKeyD1;                   // The actual value of the rotation key is just RKeyD1 with no weighting
-                }
-                   
+                }   
             while (!feof(Input)) {                      // While not at the end of the file
                 fscanf(Input, "%c", &Message[ArrayP]);  // Scans a character from the input file and enters it into the array 'Message' at element 'ArrayP'
                 ArrayP++;                               // Increments ArrayP by 1, moving the array 'Message' onto the next element
@@ -76,11 +75,11 @@ int main() {
             
         case '2':                             // If Type is '2'
             printf("Rotation Decrypt:\n");    // Prints the name of the task to the sceen followed by a new line
-            fseek (Input, 6, SEEK_SET);       // Sets the cursor in the input file to in front of the 1st key digit
+            fseek (Input, 5, SEEK_SET);       // Sets the cursor in the input file to in front of the 1st key digit
             RKeyD1 = (int) fgetc(Input) - 48; // Sets RKeyD1 to the interger corresponding to the character read from the file (i.e. "2" becomes 2)
                 if (RKeyD1 == 0 || RKeyD1 == 1 || RKeyD1 == 2){ // If the first digit of the key is 0, 1, or 2
                     
-                    fseek (Input, 7, SEEK_SET);       // Move the cursor in the input file to in front of the 2nd key digit
+                    fseek (Input, 6, SEEK_SET);       // Move the cursor in the input file to in front of the 2nd key digit
                     RKeyD2 = (int) fgetc(Input) - 48; // Sets RKeyD2 to the interger corresponding to the character read from the file
                     
                     if (RKeyD2 < 0 || RKeyD2 > 9){    // If the value of RKeyD2 is less than 0 or RKeyD2 is greater than 9
@@ -109,7 +108,7 @@ int main() {
             
         case '3':                                                 // If Type is '3'
             printf("Substitution Encrypt:\n");                    // Prints the name of the task to the sceen followed by a new line
-                for (int Indicator = 6; Indicator < 32; Indicator++){ // For cursor locations 6 to 31
+                for (int Indicator = 5; Indicator < 32; Indicator++){ // For cursor locations 6 to 31
                     fseek (Input, Indicator, SEEK_SET);               // Read from the Input file at the current cursor location
                     SKey[ArrayP] = fgetc(Input);                      // Put the character read into the corresponding element of the SubstitutionKey array
                     ArrayP++;                                         // Increment ArrayP by 1 to move on to the next element of the array
@@ -130,7 +129,7 @@ int main() {
             
         case '4':                                                 // If Type is '4'
             printf("Substitution Decrypt:\n");                    // Prints the name of the task to the sceen followed by a new line
-                for (int Indicator = 6; Indicator < 32; Indicator++){ // For cursor locations 6 to 31
+                for (int Indicator = 5; Indicator < 32; Indicator++){ // For cursor locations 6 to 31
                     fseek (Input, Indicator, SEEK_SET);               // Read from the Input file at the current cursor location
                     SKey[ArrayP] = fgetc(Input);                      // Put the character read into the corresponding element of the SubstitutionKey array
                     ArrayP++;                                         // Increment ArrayP by 1 to move on to the next element of the array
@@ -150,7 +149,7 @@ int main() {
             
         case '5':                            // If Type is '5'
             printf("Rotation Crack:\n");     // Prints the name of the task to the sceen followed by a new line            
-            fseek (Input, 6, SEEK_SET);      // Sets the cursor in the input file to in front of the encrypted letters
+            fseek (Input, 4, SEEK_SET);      // Sets the cursor in the input file to in front of the encrypted letters
                         
                 while (!feof(Input)) {                      // While not at the end of the file
                     fscanf(Input, "%c", &Message[ArrayP]);  // Scans a character from the input file and enters it into the array 'Message' at element 'ArrayP'
@@ -162,7 +161,7 @@ int main() {
             
         case '6':                            // If Type is '6'
             printf("Substitution Crack:\n"); // Prints the name of the task to the sceen followed by a new line
-            fseek (Input, 6, SEEK_SET);      // Sets the cursor in the input file to in front of the encrypted letters 
+            fseek (Input, 4, SEEK_SET);      // Sets the cursor in the input file to in front of the encrypted letters 
                         
                 while (!feof(Input)) {                      // While not at the end of the file
                     fscanf(Input, "%c", &Message[ArrayP]);  // Scans a character from the input file and enters it into the array 'Message' at element 'ArrayP'
