@@ -96,3 +96,84 @@ void SubstitutionDecrypt (char x[], char Key[]) {
      n++; //n increments by 1, moving the loop onto the next character in the array
     }   
 }
+/*void RotationCrack (char x[]){
+    int Frequency[26] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}; //Creates an array for counting the frequency of letters
+    char Alphabet[26] = {"ABCDEFGHIJKLMNOPQRSTUVWXYZ"}; //The standard alphabet, is used for comparison
+    int n = 0;            //Array element number, determines which part of the array is accessed        
+    int Stop = strlen(x); //Makes stop the length of the string
+    
+    while (n < Stop) {                //While the array element number is lower than the size of the array
+        if (x[n] > 96 && x[n] < 123){ //If the letter is lowercase
+            x[n] -= 32;               //Make it uppercase
+        }
+               
+        for (int r = 0; r < 26; r++) { //For every letter in the alphabet
+            if (x[n] == Alphabet[r]) { //If the current array element is equal to the current letter of the alphabet
+                Frequency[r] ++;       //Then the counter for that letter increases
+                break;                 //Move onto next letter
+            }   
+        }
+     n++; //n increments by 1, moving the loop onto the next character in the array
+    }   
+    
+    
+    int Largest;                    //Declares an integer that will hold the most frequent letter
+    int SecondLargest;              //Declares an integer that will hold the second most frequent letter
+    int ThirdLargest;               //Declares an integer that will hold the third most frequent letter
+    int Location1 = 0;              //Declares an integer that will hold the array index of the most frequent letter 
+    int Location2 = 0;              //Declares an integer that will hold the array index of the second most frequent letter 
+    int Location3 = 0;              //Declares an integer that will hold the array index of the third most frequent letter 
+    Largest = x[0];                 //Sets a base line that will be used in comparing the frequencies
+    SecondLargest = x[0];           //Sets a base line that will be used in comparing the frequencies
+    ThirdLargest = x[0];            //Sets a base line that will be used in comparing the frequencies
+    int Temp1Largest;               //Will be used while swapping values later
+    int Temp2Largest;               //Will be used while swapping values later
+    int Temp1Location;              //Will be used while swapping values later
+    int Temp2Location;              //Will be used while swapping values later
+    
+    for (int s = 1; s < 26; s++){   //For every number in the array 'Frequency'
+        if (x[s] > Largest){        //If the number at the current element is bigger than the recorded largest
+            
+            Temp1Largest = Largest;     //Temporarily store the old largest value
+            Temp1Location = Location1;  //Temporarily store the location of the old largest
+            
+            Temp2Largest = SecondLargest;//Temporarily store the old second largest value
+            Temp2Location = Location2;   //Temporarily store the location of the old second largest
+            
+            Largest  = x[s];                //The current element becomes the recorded largest
+            Location1 = s;                  //The location of the largest element is updated
+            
+            SecondLargest = Temp1Largest;   //The old largest value becomes the new second largest
+            Location2 = Temp1Location;      //The location of the old largest becomes the location of the new second largest
+            
+            ThirdLargest = Temp2Largest;    //The old second largest value becomes the new third largest
+            Location3 = Temp2Location;      //The location of the old second largest becomes the location of the new third largest
+        }
+        
+        else if (x[s] > SecondLargest && x[s] < Largest){//If the current element is larger than the second and third largest but not the largest
+            Temp2Largest = SecondLargest;         //Temporarily store the old second largest value
+            Temp2Location = Location2;            //Temporarily store the location of the old second largest
+            
+            SecondLargest  = x[s];                //The current element becomes the recorded second largest
+            Location2 = s;                        //The location of the second largest element is updated
+            
+            ThirdLargest = Temp2Largest;          //The old second largest value becomes the new third largest
+            Location3 = Temp2Location;            //The location of the old second largest becomes the location of the new third largest
+        }
+        
+        else if (x[s] > ThirdLargest && x[s] < SecondLargest){//If the current element is only larger than the third largest
+            ThirdLargest  = x[s];                             //The current element becomes the recorded third largest
+            Location3 = s;                                    //The location of the third largest element is updated
+        }
+    
+    }
+    
+    
+    
+    ETA
+    
+    
+    
+    printf("%s", Message);           // Prints the encrypted Message to the screen
+    fprintf(Output, "%s", Message);  // Writes the encrypted message to a text file called 'Output'
+}*/
