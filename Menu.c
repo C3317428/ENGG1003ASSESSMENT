@@ -157,9 +157,7 @@ int main() {
                     ArrayP++;                               // Increments ArrayP by 1, moving the array 'Message' onto the next element
                 }
                 
-            //RotationCrack(Message);        // Passes the array 'Message' to the function RotationCrack
-            printf("%s", Message);           // Prints the encrypted Message to the screen
-            fprintf(Output, "%s", Message);  // Writes the encrypted message to a text file called 'Output'
+            RotationCrack(Message);        // Passes the array 'Message' to the function RotationCrack
         break;                               // Ends the switch case
             
         case '6':                            // If Type is '6'
