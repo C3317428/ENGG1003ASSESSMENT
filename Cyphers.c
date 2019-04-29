@@ -122,79 +122,40 @@ void RotationCrack (char x[]){
     
     
     int Largest;                    //Declares an integer that will hold the most frequent letter
-    int SecondLargest;              //Declares an integer that will hold the second most frequent letter
-    int ThirdLargest;               //Declares an integer that will hold the third most frequent letter
-    int Location1 = 0;              //Declares an integer that will hold the array index of the most frequent letter 
-    int Location2 = 0;              //Declares an integer that will hold the array index of the second most frequent letter 
-    int Location3 = 0;              //Declares an integer that will hold the array index of the third most frequent letter 
+    int Location = 0;               //Declares an integer that will hold the array index of the most frequent letter 
     Largest = x[0];                 //Sets a base line that will be used in comparing the frequencies
-    SecondLargest = x[0];           //Sets a base line that will be used in comparing the frequencies
-    ThirdLargest = x[0];            //Sets a base line that will be used in comparing the frequencies
-    int Temp1Largest;               //Will be used while swapping values later
-    int Temp2Largest;               //Will be used while swapping values later
-    int Temp1Location;              //Will be used while swapping values later
-    int Temp2Location;              //Will be used while swapping values later
     
     for (int s = 1; s < 26; s++){   //For every number in the array 'Frequency'
         if (x[s] > Largest){        //If the number at the current element is bigger than the recorded largest
-            
-            Temp1Largest = Largest;     //Temporarily store the old largest value
-            Temp1Location = Location1;  //Temporarily store the location of the old largest
-            
-            Temp2Largest = SecondLargest;//Temporarily store the old second largest value
-            Temp2Location = Location2;   //Temporarily store the location of the old second largest
-            
             Largest  = x[s];                //The current element becomes the recorded largest
-            Location1 = s;                  //The location of the largest element is updated
-            
-            SecondLargest = Temp1Largest;   //The old largest value becomes the new second largest
-            Location2 = Temp1Location;      //The location of the old largest becomes the location of the new second largest
-            
-            ThirdLargest = Temp2Largest;    //The old second largest value becomes the new third largest
-            Location3 = Temp2Location;      //The location of the old second largest becomes the location of the new third largest
-        }
-        
-        else if (x[s] > SecondLargest && x[s] < Largest){//If the current element is larger than the second and third largest but not the largest
-            Temp2Largest = SecondLargest;         //Temporarily store the old second largest value
-            Temp2Location = Location2;            //Temporarily store the location of the old second largest
-            
-            SecondLargest  = x[s];                //The current element becomes the recorded second largest
-            Location2 = s;                        //The location of the second largest element is updated
-            
-            ThirdLargest = Temp2Largest;          //The old second largest value becomes the new third largest
-            Location3 = Temp2Location;            //The location of the old second largest becomes the location of the new third largest
-        }
-        
-        else if (x[s] > ThirdLargest && x[s] < SecondLargest){//If the current element is only larger than the third largest
-            ThirdLargest  = x[s];                             //The current element becomes the recorded third largest
-            Location3 = s;                                    //The location of the third largest element is updated
+            Location = s;                   //The location of the largest element is updated 
         }
     }
     
-    int Key1 = (int) Alphabet[Location1] - (int) "E"
-     if (Key1 < 0){
-         Key1 += 26
+    int Key1 = (int) Alphabet[Location] - (int) "E"; //Determines the key if the most frequent letter is E
+     if (Key1 < 0){                                  //If in determining the key we accidentally create a negative
+         Key1 += 26;                                 //Loop it back around into a reasonable number
      }
-    int Key2 = (int) Alphabet[Location1] - (int) "T"
-     if (Key2 < 0){
-         Key2 += 26
+    int Key2 = (int) Alphabet[Location] - (int) "T"; //Determines the key if the most frequent letter is T
+     if (Key2 < 0){                                  //If in determining the key we accidentally create a negative
+         Key2 += 26;                                 //Loop it back around into a reasonable number
      }
-    int Key3 = (int) Alphabet[Location1] - (int) "A"
-     if (Key3 < 0){
-         Key3 += 26
+    int Key3 = (int) Alphabet[Location] - (int) "A"; //Determines the key if the most frequent letter is A
+     if (Key3 < 0){                                  //If in determining the key we accidentally create a negative
+         Key3 += 26;                                 //Loop it back around into a reasonable number
      }
-    FILE *Output;                      // Creates a file pointer at Output
-    Output = fopen("Output.txt", "w"); // Creates the file "Output.txt" for writing and allocates it to Output
+    FILE *Output;                      //Creates a file pointer at Output
+    Output = fopen("Output.txt", "w"); //Creates the file "Output.txt" for writing and allocates it to Output
     
-    RotationDecrypt(x[], Key1);
-    printf("%s", x[]);           // Prints the encrypted Message to the screen
-    fprintf(Output, "%s", x[]);
-    RotationEncrypt(x[], Key1);
+    RotationDecrypt(x[], Key1);  //Decrypts the message using the Key 1
+    printf("%s", x[]);           //Prints the most probable decrypted Message to the screen
+    fprintf(Output, "%s\n", x[]);//Writes the decrypted message to the output file
+    RotationEncrypt(x[], Key1);  //Re-encrypts the message using key 1 so that key 2 may be used on the unaltered message 
    
-    RotationDecrypt(x[], Key2);
-    fprintf(Output, "%s", x[]);
-    RotationEncrypt(x[], Key2);
+    RotationDecrypt(x[], Key2);  //Decrypts the message using the Key 2
+    fprintf(Output, "%s\n", x[]);//Writes the decrypted message to the output file
+    RotationEncrypt(x[], Key2);  //Re-encrypts the message using key 2 so that key 3 may be used on the unaltered message 
    
-    RotationDecrypt(x[], Key3);
-    fprintf(Output, "%s", x[]); 
+    RotationDecrypt(x[], Key3);  //Decrypts the message using the Key 3
+    fprintf(Output, "%s", x[]);  //Writes the decrypted message to the output file
 }
