@@ -12,15 +12,13 @@ void RotationEncrypt (char x[], int Key){
         
         if (96 < x[r] && x[r] < 123){ //If the letter is lowercase
             x[r] -= 32;               //Make it uppercase
-        }
-                
+        }       
         if (64 < x[r] && x[r]< 91){ //If it is an uppercase letter
             x[r] += Key;            //Uses the key to rotate the letter forwards through the alphabet
                 if (x[r] > 90){     //If the letter goes past 'Z'
                     x[r] -= 26;     //Loop back around towards the start of the alphabet
                 }
         }
-        
         else {} //If it's not an uppercase letter, don't change it
         r++;    // r increments by 1, moving the loop onto the next character in the array
     }
@@ -131,31 +129,38 @@ void RotationCrack (char x[]){
             Location = s;                   //The location of the largest element is updated 
         }
     }
+    char MFL = Alphabet[Location - 1]; //Sets a character called 'MFL' to the most frequent letter
     
-    int Key1 = (int) Alphabet[Location] - (int) "E"; //Determines the key if the most frequent letter is E
+    int Key1 = MFL - 69; //Determines the key if the most frequent letter decrypts to E
+     Key1 = Key1 % 26;
      if (Key1 < 0){                                  //If in determining the key we accidentally create a negative
-         Key1 += 26;                                 //Loop it back around into a reasonable number
+         Key1 = -(Key1);                                 //Loop it back around into a reasonable number
      }
-    int Key2 = (int) Alphabet[Location] - (int) "T"; //Determines the key if the most frequent letter is T
+    int Key2 = MFL - 84; //Determines the key if the most frequent letter decrypts to T
+     Key2 = Key2 % 26;
      if (Key2 < 0){                                  //If in determining the key we accidentally create a negative
-         Key2 += 26;                                 //Loop it back around into a reasonable number
+         Key2 = -(Key2);                                 //Loop it back around into a reasonable number
      }
-    int Key3 = (int) Alphabet[Location] - (int) "A"; //Determines the key if the most frequent letter is A
+    int Key3 = MFL - 65; //Determines the key if the most frequent letter decrypts to A
+     Key3 = Key3 % 26;
      if (Key3 < 0){                                  //If in determining the key we accidentally create a negative
-         Key3 += 26;                                 //Loop it back around into a reasonable number
+         Key3 = -(Key3);                                 //Loop it back around into a reasonable number
      }
+    printf("%c", MFL);
+    printf("%d, %d, %d", Key1, Key2, Key3);
+    
     FILE *Output;                      //Creates a file pointer at Output
     Output = fopen("Output.txt", "w"); //Creates the file "Output.txt" for writing and allocates it to Output
     
-    RotationDecrypt(x[], Key1);  //Decrypts the message using the Key 1
-    printf("%s", x[]);           //Prints the most probable decrypted Message to the screen
-    fprintf(Output, "%s\n", x[]);//Writes the decrypted message to the output file
-    RotationEncrypt(x[], Key1);  //Re-encrypts the message using key 1 so that key 2 may be used on the unaltered message 
+    RotationDecrypt(x, Key1);  //Decrypts the message using the Key 1
+    printf("%s", x);           //Prints the most probable decrypted Message to the screen
+    fprintf(Output, "%s\n", x);//Writes the decrypted message to the output file
+    RotationEncrypt(x, Key1);  //Re-encrypts the message using key 1 so that key 2 may be used on the unaltered message 
    
-    RotationDecrypt(x[], Key2);  //Decrypts the message using the Key 2
-    fprintf(Output, "%s\n", x[]);//Writes the decrypted message to the output file
-    RotationEncrypt(x[], Key2);  //Re-encrypts the message using key 2 so that key 3 may be used on the unaltered message 
+    RotationDecrypt(x, Key2);  //Decrypts the message using the Key 2
+    fprintf(Output, "%s\n", x);//Writes the decrypted message to the output file
+    RotationEncrypt(x, Key2);  //Re-encrypts the message using key 2 so that key 3 may be used on the unaltered message 
    
-    RotationDecrypt(x[], Key3);  //Decrypts the message using the Key 3
-    fprintf(Output, "%s", x[]);  //Writes the decrypted message to the output file
+    RotationDecrypt(x, Key3);  //Decrypts the message using the Key 3
+    fprintf(Output, "%s", x);  //Writes the decrypted message to the output file
 }
